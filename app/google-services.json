@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "584275895335",
+    "firebase_url": "https://comssa-40203-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "comssa-40203",
+    "storage_bucket": "comssa-40203.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584275895335:android:6d94d4f9a2dfbc9a481a02",
+        "android_client_info": {
+          "package_name": "com.keelim.comssa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584275895335-66e23im8lb9b4ofa9iugg31rfgcd9g0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMTLFPbuSLvJzP8qoywPtX0t6ifyuaq1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584275895335-66e23im8lb9b4ofa9iugg31rfgcd9g0h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
