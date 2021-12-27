@@ -2,7 +2,6 @@ import com.android.build.gradle.BaseExtension
 
 configure<BaseExtension> {
     setCompileSdkVersion(ProjectConfigurations.compileSdk)
-
     defaultConfig {
         minSdk = ProjectConfigurations.minSdk
         setTargetSdkVersion(ProjectConfigurations.targetSdk)

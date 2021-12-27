@@ -4,3 +4,5 @@ plugins {
     id("kotlin-android")
     id("kotlin-setting-plugin")
 }
+
+apply(from = "$rootDir/spotless.gradle")
