@@ -1,30 +1,21 @@
-import Glide.moshi
-import Glide.moshi_codegen
-import Glide.moshi_kotlin
-import SquareUp.retrofit_moshi
-
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    id("library-setting-plugin")
+    id("com.google.devtools.ksp")
     kotlin("kapt")
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
-}
-
-listOf(
-    "android.gradle",
-).forEach { file ->
-    apply(from = "${rootDir}/gradle/${file}")
 }
 
 android {
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments += mapOf(
-                    "room.schemaLocation" to "$projectDir/schemas",
-                    "room.incremental" to "true",
-                    "room.expandProjection" to "true"
+                arguments.plus(
+                    mapOf(
+                        "room.schemaLocation" to "$projectDir/schemas",
+                        "room.incremental" to "true",
+                        "room.expandProjection" to "true"
+                    )
                 )
             }
         }
@@ -50,7 +41,7 @@ dependencies {
 
     implementation(Room.runtime)
     implementation(Room.ktx)
-    kapt(Room.compiler)
+    ksp(Room.compiler)
 
     implementation(SquareUp.timber)
     implementation(Kotlin.Coroutines.android)
@@ -69,8 +60,7 @@ dependencies {
     implementation(SquareUp.urlconnection)
     implementation(SquareUp.retrofit)
     implementation(SquareUp.retrofit_gson)
-    implementation(retrofit_moshi)
-    implementation(moshi)
-    implementation(moshi_kotlin)
-    implementation(moshi_codegen)
+    implementation(SquareUp.retrofit_moshi)
+    implementation(Dep.moshi_kotlin)
+    ksp(Dep.moshi_codegen)
 }

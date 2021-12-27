@@ -1,45 +1,29 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    id("application-setting-plugin")
+    kotlin("kapt")
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
+    id("com.google.android.gms.oss-licenses-plugin")
     id("com.google.firebase.crashlytics")
     id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs")
-    id("com.google.android.gms.oss-licenses-plugin")
 }
 
 android {
-    compileSdk = ProjectConfigurations.compileSdk
-
     defaultConfig {
         applicationId = ProjectConfigurations.applicationId
-        minSdk = ProjectConfigurations.minSdk
-        targetSdk = ProjectConfigurations.targetSdk
         versionCode = ProjectConfigurations.versionCode
         versionName = ProjectConfigurations.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    buildFeatures {
+    buildFeatures{
         dataBinding = true
-        viewBinding = true
     }
 }
 
 dependencies {
-    implementation(project(":data"))
-    implementation(project(":domain"))
+    implementation(projects.data)
+    implementation(projects.domain)
     implementation("androidx.core:core-ktx:1.6.0")
     implementation("androidx.appcompat:appcompat:1.3.0")
     implementation("com.google.android.material:material:1.4.0")

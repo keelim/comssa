@@ -136,27 +136,59 @@ object Glide {
     const val compiler = "com.github.bumptech.glide:compiler:$version"
 
 
-    object Dep {
-        object GradlePlugin {
-            private const val androidStudioVersion = "4.2.0-alpha14"
-            const val android = "com.android.tools.build:gradle:$androidStudioVersion"
-            const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
-            const val kotlinSerialization =
-                "org.jetbrains.kotlin:kotlin-serialization:${Kotlin.version}"
-            const val ktlint = "org.jlleitschuh.gradle:ktlint-gradle:9.4.0"
-            const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Hilt.version}"
-        }
 
 
-        object Dagger {
-            private const val version = "2.29.1"
-            const val dagger = "com.google.dagger:dagger:$version"
-            const val compiler = "com.google.dagger:dagger-compiler:$version"
-        }
+}
 
-        const val jsoup = "org.jsoup:jsoup:1.13.1"
+object Dep {
+    object GradlePlugin {
+        private const val androidStudioVersion = "4.2.0-alpha14"
+        const val android = "com.android.tools.build:gradle:$androidStudioVersion"
+        const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
+        const val kotlinSerialization =
+            "org.jetbrains.kotlin:kotlin-serialization:${Kotlin.version}"
+        const val ktlint = "org.jlleitschuh.gradle:ktlint-gradle:9.4.0"
+        const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Hilt.version}"
     }
 
+
+    object Dagger {
+        private const val version = "2.29.1"
+        const val dagger = "com.google.dagger:dagger:$version"
+        const val compiler = "com.google.dagger:dagger-compiler:$version"
+    }
+
+    object AndroidX{
+        object activity {
+            const val activityVersion = "1.4.0"
+            const val activity = "androidx.activity:activity:$activityVersion"
+            const val ktx = "androidx.activity:activity-ktx:$activityVersion"
+        }
+
+        object lifecycle {
+            const val lifecycleVersion = "2.4.0"
+            const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+            const val runtimeTesting = "androidx.lifecycle:lifecycle-runtime-testing:$lifecycleVersion"
+        }
+
+        object Compose {
+            const val version = "1.0.5"
+
+            const val runtime = "androidx.compose.runtime:runtime:$version"
+            const val ui = "androidx.compose.ui:ui:${version}"
+            const val material = "androidx.compose.material:material:${version}"
+            const val materialAdapter = "com.google.android.material:compose-theme-adapter:${version}"
+            const val tooling = "androidx.compose.ui:ui-tooling:${version}"
+            const val livedata = "androidx.compose.runtime:runtime-livedata:$version"
+            const val animation = "androidx.compose.animation:animation:$version"
+
+            const val activity = "androidx.activity:activity-compose:${AndroidX.activity.activityVersion}"
+            const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.0-rc02"
+            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${AndroidX.lifecycle.lifecycleVersion}"
+        }
+    }
+
+    const val jsoup = "org.jsoup:jsoup:1.13.1"
     const val moshi = "com.squareup.moshi:moshi:1.12.0"
     const val moshi_kotlin = "com.squareup.moshi:moshi-kotlin:1.12.0"
     const val moshi_codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.12.0"

@@ -1,19 +1,13 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    id("library-setting-plugin")
+    id("com.google.devtools.ksp")
     kotlin("kapt")
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
 }
 
-listOf(
-    "android.gradle",
-).forEach { file ->
-    apply(from = "${rootDir}/gradle/${file}")
-}
-
 dependencies {
-    implementation(project(":data"))
+    implementation(projects.data)
     implementation(AndroidX.core_ktx)
     implementation(Hilt.android)
     implementation("androidx.paging:paging-common-ktx:3.1.0")
