@@ -16,6 +16,7 @@
 package com.keelim.comssa.di
 
 import android.content.Context
+import androidx.room.Room
 import com.keelim.comssa.data.db.AppDatabase
 import com.keelim.comssa.data.preference.PreferenceManager
 import com.keelim.comssa.data.preference.SharedPreferenceManager
@@ -24,6 +25,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import java.io.File
 import javax.inject.Singleton
 
 @Module
@@ -33,9 +35,15 @@ object DatabaseModule {
   @Singleton
   fun provideAppDataBase(
     @ApplicationContext context: Context
-  ): AppDatabase {
-    return AppDatabase.getInstance(context)
-  }
+  ): AppDatabase = Room.databaseBuilder(
+    context.applicationContext,
+    AppDatabase::class.java,
+    "Search"
+  )
+    .createFromFile(File(context.getExternalFilesDir(null), "comssa.db"))
+    .allowMainThreadQueries()
+    .build()
+
 
   @Provides
   @Singleton

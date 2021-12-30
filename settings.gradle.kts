@@ -15,8 +15,9 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "comssa"
-include (
-        ":app",
-        ":data",
-        ":domain",
+include(
+    ":app",
+    ":data",
+    ":common",
+    ":domain",
 )

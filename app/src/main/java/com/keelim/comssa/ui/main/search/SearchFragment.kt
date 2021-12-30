@@ -81,7 +81,6 @@ class SearchFragment: Fragment() {
         bottomButton.setOnClickListener {
             requireContext().toast("기능 준비중 입니다. 조금만 기다려주세요.")
         }
-        viewModel.init()
     }
 
     private fun search2(query: String) = lifecycleScope.launch {
