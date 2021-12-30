@@ -35,4 +35,6 @@ interface IoRepository {
     fun getFavoriteItemsByPaging(): Flow<PagingData<Search>>
 
     suspend fun getDownloadLink(path: String): PasswordResult
+
+    suspend fun sheetData(): List<Search>
 }

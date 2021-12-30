@@ -21,6 +21,7 @@ import androidx.paging.PagingData
 import com.keelim.comssa.data.api.ApiRequestFactory
 import com.keelim.comssa.data.db.AppDatabase
 import com.keelim.comssa.data.db.entity.Search
+import com.keelim.comssa.data.db.entity.mapper.toSearch
 import com.keelim.comssa.data.model.PasswordResult
 import com.keelim.comssa.data.paging.FavoritePagingSource
 import com.keelim.comssa.data.paging.SearchPagingSource
@@ -50,7 +51,7 @@ class IoRepositoryImpl @Inject constructor(
   override val favoriteFlow: Flow<List<Search>>
     get() = db.searchDao.getFavorite2()
 
-  override fun getContentItemsByPaging(query:String): Flow<PagingData<Search>> {
+  override fun getContentItemsByPaging(query: String): Flow<PagingData<Search>> {
     return Pager(
       config = PagingConfig(pageSize = 10),
       pagingSourceFactory = { SearchPagingSource(db.searchDao, query) }
@@ -65,15 +66,28 @@ class IoRepositoryImpl @Inject constructor(
   }
 
   override suspend fun getDownloadLink(path: String): PasswordResult = withContext(ioDispatcher) {
-    try {
+    return@withContext try {
       val response = apiRequestFactory.retrofit.getData()
       if (response.isNotEmpty()) {
-        return@withContext PasswordResult(response, response, true)
+        PasswordResult(response, response, true)
       } else {
-        return@withContext PasswordResult("", "", false)
+        PasswordResult("", "", false)
       }
     } catch (e: Exception) {
-      return@withContext PasswordResult("", "", false)
+      PasswordResult("", "", false)
+    }
+  }
+
+  override suspend fun sheetData(): List<Search>  = withContext(ioDispatcher){
+    return@withContext try{
+      val response = apiRequestFactory.retrofit.getSheetData()
+      if(response.isSuccessful && response.body() != null){
+        response.body()?.toSearch() ?: emptyList()
+      } else{
+        emptyList()
+      }
+    } catch (e: Exception){
+      emptyList()
     }
   }
 }

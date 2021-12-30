@@ -20,10 +20,15 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.keelim.comssa.data.model.Data
+import com.keelim.comssa.di.IoDispatcher
 import javax.inject.Inject
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.tasks.await
 
-class DataApiImpl @Inject constructor() : DataApi {
+class DataApiImpl @Inject constructor(
+  private val apiRequestFactory: ApiRequestFactory,
+  @IoDispatcher private val dispatcher: CoroutineDispatcher,
+) : DataApi {
   private val fireStore = Firebase.firestore
 
   override suspend fun getAllData(): List<Data> {
@@ -38,6 +43,6 @@ class DataApiImpl @Inject constructor() : DataApi {
       .whereIn(FieldPath.documentId(), dataIds)
       .get()
       .await()
-      .map { it.toObject<Data>() }
+      .map { it.toObject() }
   }
 }

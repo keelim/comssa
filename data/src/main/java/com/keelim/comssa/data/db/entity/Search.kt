@@ -28,3 +28,5 @@ data class Search(
   val favorite: Int,
   var relation: String?,
 )
+
+

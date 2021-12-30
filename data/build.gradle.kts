@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     id("library-setting-plugin")
     id("com.google.devtools.ksp")
@@ -21,6 +22,14 @@ android {
         }
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    val BASE_URL: String = gradleLocalProperties(rootDir).getProperty("BASE_URL")
+    buildTypes {
+        defaultConfig{
+            buildConfigField("String", "BASE_URL", BASE_URL)
+        }
+    }
+
 
     sourceSets {
         getByName("androidTest").assets.srcDirs("$projectDir/schemas")
