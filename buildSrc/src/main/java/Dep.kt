@@ -9,12 +9,29 @@ object DataStore {
         "androidx.datastore:datastore-preferences:${dataStorePreferences}"
 }
 
+object Paging{
+    const val common =  "androidx.paging:paging-common-ktx:3.1.0"
+    const val runtime = "androidx.paging:paging-runtime-ktx:3.1.0"
+}
 
 object Play {
     const val play_location = "com.google.android.gms:play-services-location:18.0.0"
     const val play_map = "com.google.android.gms:play-services-maps:17.0.0"
     const val play_ads = "com.google.android.gms:play-services-ads:20.0.0"
-    const val play_core = "com.google.android.play:core:1.10.0"
+    const val core = "com.google.android.play:core-ktx:1.8.1"
+    const val oss = "com.google.android.gms:play-services-oss-licenses:17.0.0"
+    const val admob = "com.google.android.gms:play-services-ads:20.5.0"
+}
+
+object Firebase{
+    const val platform = "com.google.firebase:firebase-bom:28.1.0"
+    const val analytics = "com.google.firebase:firebase-analytics-ktx"
+    const val auth = "com.google.firebase:firebase-auth-ktx"
+    const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
+    const val perf = "com.google.firebase:firebase-perf-ktx"
+    const val firestore = "com.google.firebase:firebase-firestore-ktx"
+    const val storage = "com.google.firebase:firebase-storage-ktx"
+    const val database = "com.google.firebase:firebase-database-ktx"
 }
 
 object Rx {
@@ -37,7 +54,7 @@ object SquareUp {
 }
 
 object Room {
-    private const val roomVersion = "2.3.0"
+    private const val roomVersion = "2.4.0"
     const val runtime = "androidx.room:room-runtime:$roomVersion"
     const val compiler = "androidx.room:room-compiler:$roomVersion"
     const val ktx = "androidx.room:room-ktx:$roomVersion"
@@ -68,19 +85,21 @@ object Hilt {
 object AndroidX {
     const val annotation = "androidx.annotation:annotation:1.2.0-alpha01"
 
-    private const val activityVersion = "1.2.3"
+    private const val activityVersion = "1.4.0"
     const val activity = "androidx.activity:activity:$activityVersion"
     const val activity_ktx = "androidx.activity:activity-ktx:$activityVersion"
 
-    private const val fragmentVersion = "1.2.3"
+    private const val fragmentVersion = "1.4.0"
     const val fragment = "androidx.fragment:fragment:$fragmentVersion"
     const val fragment_ktx = "androidx.fragment:fragment-ktx:$fragmentVersion"
 
-    const val appcompat = "androidx.appcompat:appcompat:1.3.0-rc01"
-    const val core_ktx = "androidx.core:core-ktx:1.6.0-alpha03"
+    const val appcompat = "androidx.appcompat:appcompat:1.4.0"
+    const val material = "com.google.android.material:material:1.5.0-alpha04"
+    const val core_ktx = "androidx.core:core-ktx:1.7.0"
 
-    const val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:2.3.5"
-    const val navigation_ui = "androidx.navigation:navigation-ui-ktx:2.3.5"
+    private const val navigationVersion = "2.3.5"
+    const val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    const val navigation_ui = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
     const val startup = "androidx.startup:startup-runtime:1.1.0"
 }
@@ -118,7 +137,7 @@ object Kotlin {
     const val stdlibJvm = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
 
     object Coroutines {
-        private const val coroutinesVersion = "1.5.0"
+        private const val coroutinesVersion = "1.5.2"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
         const val android =
             "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
@@ -177,6 +196,7 @@ object Dep {
             const val runtime = "androidx.compose.runtime:runtime:$version"
             const val ui = "androidx.compose.ui:ui:${version}"
             const val material = "androidx.compose.material:material:${version}"
+            const val material3 = "androidx.compose.material3:material3:1.0.0-alpha02"
             const val materialAdapter = "com.google.android.material:compose-theme-adapter:${version}"
             const val tooling = "androidx.compose.ui:ui-tooling:${version}"
             const val livedata = "androidx.compose.runtime:runtime-livedata:$version"
@@ -192,4 +212,5 @@ object Dep {
     const val moshi = "com.squareup.moshi:moshi:1.12.0"
     const val moshi_kotlin = "com.squareup.moshi:moshi-kotlin:1.12.0"
     const val moshi_codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.12.0"
+    const val timber = "com.jakewharton.timber:timber:5.0.1"
 }

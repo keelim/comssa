@@ -6,3 +6,6 @@ git clone https://github.com/keelim/buildSrc
 
 # buildSrc 만 빌드
 ./gradlew --refresh-dependencies
+
+cd buildSrc
+rm -rf ./.git
