@@ -1,6 +1,6 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
-    val agpVersion = "7.2.0-alpha05"
+    val agpVersion = "7.4.0"
     val kotlinVersion = "1.5.31"
 
     repositories {
@@ -11,7 +11,7 @@ pluginManagement {
     plugins {
         id("com.android.application") version agpVersion
         id("com.android.library") version agpVersion
-        id("org.jetbrains.kotlin.android") version kotlinVersion
+        id("org.jetbrains.kotlin.android") version "1.6.0"
         id("org.jetbrains.kotlin.jvm") version kotlinVersion
         id("org.jetbrains.kotlin.kapt") version kotlinVersion
         id("org.jetbrains.kotlin.parcelize") version kotlinVersion
@@ -20,7 +20,7 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             when (val id = requested.id.id) {
-                "dagger.hilt.android.plugin" -> useModule("com.google.dagger:hilt-android-gradle-plugin:2.40.4")
+                "dagger.hilt.android.plugin" -> useModule("com.google.dagger:hilt-android-gradle-plugin:2.39.1")
                 "org.jetbrains.kotlin.plugin.serialization" -> useModule("${id}:${id}.gradle.plugin:${kotlinVersion}")
             }
         }
@@ -41,4 +41,5 @@ include(
     ":data",
     ":common",
     ":domain",
+    ":compose"
 )

@@ -87,7 +87,7 @@ class IoRepositoryImpl @Inject constructor(
         emptyList()
       }
     } catch (e: Exception){
-      emptyList()
+      throw Exception(e)
     }
   }
 }

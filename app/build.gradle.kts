@@ -1,12 +1,14 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     id("application-setting-plugin")
-    kotlin("kapt")
+    id("kotlin-kapt")
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
     id("com.google.android.gms.oss-licenses-plugin")
     id("com.google.firebase.crashlytics")
     id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs")
+    id("compose-plugin")
 }
 
 android {
@@ -16,6 +18,17 @@ android {
         versionName = ProjectConfigurations.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    val AD_OPEN_ID: String = gradleLocalProperties(rootDir).getProperty("AD_OPEN_ID")
+    val APPLICATION_ID: String = gradleLocalProperties(rootDir).getProperty("APPLICATION_ID")
+    val SPLASH_UNIT: String = gradleLocalProperties(rootDir).getProperty("SPLASH_UNIT")
+    buildTypes {
+        defaultConfig{
+            buildConfigField("String", "AD_OPEN_ID", AD_OPEN_ID)
+            buildConfigField("String", "SPLASH_UNIT", SPLASH_UNIT)
+            manifestPlaceholders["APPLICATION_ID"] = APPLICATION_ID
+        }
+    }
     buildFeatures {
         dataBinding = true
     }
@@ -24,12 +37,13 @@ android {
 dependencies {
     implementation(projects.data)
     implementation(projects.domain)
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.3.0")
+    implementation(projects.common)
+    implementation(projects.compose)
+    implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.fragment:fragment-ktx:1.4.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation("androidx.lifecycle:lifecycle-process:2.3.1")
@@ -65,5 +79,13 @@ dependencies {
 
     implementation("com.google.android.gms:play-services-oss-licenses:17.0.0")
     implementation(AndroidX.startup)
+
+    implementation(Dep.AndroidX.Compose.runtime)
+    implementation(Dep.AndroidX.Compose.ui)
+    implementation(Dep.AndroidX.Compose.material)
+    implementation(Dep.AndroidX.Compose.materialAdapter)
+    implementation(Dep.AndroidX.Compose.tooling)
+    implementation(Dep.AndroidX.Compose.livedata)
+    implementation(Dep.AndroidX.Compose.animation)
 }
 apply(from = "$rootDir/spotless.gradle")

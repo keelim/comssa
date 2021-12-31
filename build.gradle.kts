@@ -3,6 +3,7 @@ buildscript {
         google()  // Google's Maven repository
         mavenCentral()
         maven("https://jitpack.io")
+        maven("https://plugins.gradle.org/m2/")
     }
     dependencies {
         classpath("com.google.gms:google-services:4.3.10")
