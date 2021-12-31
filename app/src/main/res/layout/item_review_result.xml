@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:rating="4.5" />
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@id/ratingBar"
         tools:ignore="HardcodedText" />
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/reviewFieldEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

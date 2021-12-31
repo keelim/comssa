@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipChildren="true"
@@ -32,9 +32,9 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         android:textSize="14sp"
         tools:text="짱구는 못말려" />
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/additionalInformationTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

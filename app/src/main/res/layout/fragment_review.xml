@@ -11,7 +11,7 @@
         android:overScrollMode="never"
         tools:context=".presentation.reviews.MovieReviewsFragment" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/errorDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:visibility="gone"
         tools:ignore="HardcodedText" />
 
-    <ProgressBar
+    <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

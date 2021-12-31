@@ -23,7 +23,7 @@
             android:numStars="5"
             android:rating="2.5" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/reviewFieldEditText"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -37,7 +37,7 @@
             android:textSize="14sp"
             tools:ignore="HardcodedText" />
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/contentLimitTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
             android:textSize="12sp"
             tools:ignore="HardcodedText" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

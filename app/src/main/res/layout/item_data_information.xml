@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:padding="12dp">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/posterContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,9 +33,9 @@
                 tools:layout_height="120dp"
                 tools:layout_width="80dp" />
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/averageScoreTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             app:layout_constraintStart_toStartOf="@id/titleTextView"
             tools:text="평점 3.5 (135명)" />
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/titleTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             app:layout_constraintStart_toStartOf="@id/additionalInformationTextView"
             tools:text="캐시트럭" />
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/additionalInformationTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
             app:layout_constraintStart_toEndOf="@id/posterContainer"
             tools:text="2021·미국" />
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/relationsTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

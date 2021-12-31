@@ -2,7 +2,7 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     id("library-setting-plugin")
     id("com.google.devtools.ksp")
-    kotlin("kapt")
+    id("kotlin-kapt")
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
 }
@@ -30,22 +30,21 @@ android {
         }
     }
 
-
     sourceSets {
         getByName("androidTest").assets.srcDirs("$projectDir/schemas")
     }
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:28.1.0"))
-    implementation("com.google.firebase:firebase-storage-ktx")
-    implementation("com.google.firebase:firebase-database-ktx")
-    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation(platform(Firebase.platform))
+    implementation(Firebase.storage)
+    implementation(Firebase.database)
+    implementation(Firebase.firestore)
 
     implementation(AndroidX.core_ktx)
 
+    implementation(Paging.common)
     implementation(Hilt.android)
-    implementation("androidx.paging:paging-common-ktx:3.1.0")
     kapt(Hilt.hilt_compiler)
 
     implementation(Room.runtime)
@@ -53,16 +52,9 @@ dependencies {
     ksp(Room.compiler)
 
     implementation(SquareUp.timber)
+    implementation(Kotlin.stdlibJvm)
     implementation(Kotlin.Coroutines.android)
     implementation(Kotlin.Coroutines.play)
-
-    implementation(Kotlin.stdlibJvm)
-
-    testImplementation(AppTest.junit)
-    androidTestImplementation(Room.testing)
-    androidTestImplementation(AppTest.androidJunit)
-    androidTestImplementation(AppTest.espressoCore)
-    androidTestImplementation(Kotlin.Coroutines.test)
 
     implementation(SquareUp.core)
     implementation(SquareUp.loggingInterceptor)
@@ -72,4 +64,10 @@ dependencies {
     implementation(SquareUp.retrofit_moshi)
     implementation(Dep.moshi_kotlin)
     ksp(Dep.moshi_codegen)
+
+    testImplementation(AppTest.junit)
+    androidTestImplementation(Room.testing)
+    androidTestImplementation(AppTest.androidJunit)
+    androidTestImplementation(AppTest.espressoCore)
+    androidTestImplementation(Kotlin.Coroutines.test)
 }

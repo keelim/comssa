@@ -39,6 +39,7 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.common)
     implementation(projects.compose)
+
     implementation(AndroidX.core_ktx)
     implementation(AndroidX.appcompat)
     implementation(AndroidX.material)
@@ -46,9 +47,11 @@ dependencies {
     implementation(AndroidX.fragment_ktx)
     implementation(AndroidX.navigation_fragment)
     implementation(AndroidX.navigation_ui)
+    implementation(AndroidX.startup)
 
     implementation(Play.oss)
     implementation(Play.core)
+    implementation(Play.admob)
 
     implementation(platform(Firebase.platform))
     implementation(Firebase.analytics)
@@ -56,28 +59,21 @@ dependencies {
     implementation(Firebase.crashlytics)
     implementation(Firebase.perf)
     implementation(Firebase.firestore)
+
     implementation(Paging.common)
     implementation(Paging.runtime)
 
-    testImplementation(AppTest.junit)
-    androidTestImplementation(AppTest.androidJunit)
-    androidTestImplementation(AppTest.espressoCore)
-
-    implementation(Kotlin.stdlibJvm)
-
     implementation(Dep.timber)
-    implementation(Play.admob)
 
     implementation(Hilt.android)
     kapt(Hilt.hilt_compiler)
 
+    implementation(Kotlin.stdlibJvm)
     implementation(Kotlin.Coroutines.android)
     implementation(Kotlin.Coroutines.play)
 
     implementation(Coil.coil)
     implementation(Coil.coilGif)
-
-    implementation(AndroidX.startup)
 
     implementation(Dep.AndroidX.Compose.runtime)
     implementation(Dep.AndroidX.Compose.ui)
@@ -87,5 +83,8 @@ dependencies {
     implementation(Dep.AndroidX.Compose.tooling)
     implementation(Dep.AndroidX.Compose.livedata)
     implementation(Dep.AndroidX.Compose.animation)
+    testImplementation(AppTest.junit)
+    androidTestImplementation(AppTest.androidJunit)
+    androidTestImplementation(AppTest.espressoCore)
 }
 apply(from = "$rootDir/spotless.gradle")

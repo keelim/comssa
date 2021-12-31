@@ -3,7 +3,6 @@ plugins {
     id("compose-plugin")
 }
 
-
 dependencies {
     implementation(Dep.AndroidX.Compose.runtime)
     implementation(Dep.AndroidX.Compose.ui)

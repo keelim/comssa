@@ -17,6 +17,7 @@ package com.keelim.comssa
 
 import android.app.Application
 import com.google.android.gms.ads.MobileAds
+import com.google.android.material.color.DynamicColors
 import com.keelim.comssa.utils.AppOpenManager
 import com.keelim.comssa.utils.ComponentLogger
 import dagger.hilt.android.HiltAndroidApp
@@ -31,6 +32,7 @@ class MyApplication : Application() {
         super.onCreate()
         componentLogger.initialize(this)
         MobileAds.initialize(this) {}
-        val appOpenManager = AppOpenManager(this)
+        AppOpenManager(this)
+        DynamicColors.applyToActivitiesIfAvailable(this)
     }
 }
