@@ -23,6 +23,8 @@ import com.keelim.comssa.data.db.AppDatabase
 import com.keelim.comssa.data.db.entity.Search
 import com.keelim.comssa.data.db.entity.mapper.toSearch
 import com.keelim.comssa.data.model.PasswordResult
+import com.keelim.comssa.data.model.main.notification.Notification
+import com.keelim.comssa.data.model.main.notification.toNotification
 import com.keelim.comssa.data.paging.FavoritePagingSource
 import com.keelim.comssa.data.paging.SearchPagingSource
 import com.keelim.comssa.di.IoDispatcher
@@ -83,6 +85,19 @@ class IoRepositoryImpl @Inject constructor(
       val response = apiRequestFactory.retrofit.getSheetData()
       if(response.isSuccessful && response.body() != null){
         response.body()?.toSearch() ?: emptyList()
+      } else{
+        emptyList()
+      }
+    } catch (e: Exception){
+      throw Exception(e)
+    }
+  }
+
+  override suspend fun getNotification(): List<Notification>  = withContext(ioDispatcher){
+    return@withContext try{
+      val response = apiRequestFactory.retrofit.getNotification()
+      if(response.isSuccessful && response.body() != null){
+        response.body()?.toNotification() ?: emptyList()
       } else{
         emptyList()
       }

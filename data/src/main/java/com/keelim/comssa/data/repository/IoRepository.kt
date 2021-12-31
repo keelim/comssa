@@ -18,6 +18,7 @@ package com.keelim.comssa.data.repository
 import androidx.paging.PagingData
 import com.keelim.comssa.data.db.entity.Search
 import com.keelim.comssa.data.model.PasswordResult
+import com.keelim.comssa.data.model.main.notification.Notification
 import kotlinx.coroutines.flow.Flow
 
 interface IoRepository {
@@ -37,4 +38,6 @@ interface IoRepository {
     suspend fun getDownloadLink(path: String): PasswordResult
 
     suspend fun sheetData(): List<Search>
+
+    suspend fun getNotification(): List<Notification>
 }

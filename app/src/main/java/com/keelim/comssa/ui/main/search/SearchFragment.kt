@@ -75,8 +75,8 @@ class SearchFragment: Fragment() {
         recycler.apply {
             adapter = itemAdapter
             layoutManager = LinearLayoutManager(requireContext())
+            snap.attachToRecyclerView(this)
         }
-        snap.attachToRecyclerView(recycler)
 
         bottomButton.setOnClickListener {
             requireContext().toast("기능 준비중 입니다. 조금만 기다려주세요.")

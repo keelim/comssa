@@ -36,6 +36,7 @@ import com.keelim.comssa.di.download.DownloadRequest
 import com.keelim.comssa.extensions.toast
 import com.keelim.comssa.ui.main.filter.FilterFragment
 import com.keelim.comssa.ui.main.search.SearchFragment
+import com.keelim.comssa.ui.notification.NotificationFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import javax.inject.Inject
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                     SearchFragment(),
                     SearchFragment(),
                     SearchFragment(),
-                    SearchFragment(),
+                    NotificationFragment(),
                     FilterFragment()
                 ))
             }

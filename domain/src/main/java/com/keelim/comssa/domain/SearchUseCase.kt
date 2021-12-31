@@ -33,6 +33,7 @@ package com.keelim.comssa.domain
 import androidx.paging.PagingData
 import com.keelim.comssa.data.db.entity.Search
 import com.keelim.comssa.data.model.PasswordResult
+import com.keelim.comssa.data.model.main.notification.Notification
 import com.keelim.comssa.data.repository.IoRepository
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -58,4 +59,6 @@ class SearchUseCase @Inject constructor(
     }
 
     suspend fun getSearchData(): List<Search> = ioRepository.sheetData()
+
+    suspend fun getNotificationData(): List<Notification> = ioRepository.getNotification()
 }

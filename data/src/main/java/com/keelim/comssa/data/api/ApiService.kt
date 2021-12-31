@@ -16,6 +16,7 @@
 package com.keelim.comssa.data.api
 
 import com.keelim.comssa.data.BuildConfig
+import com.keelim.comssa.data.api.response.ResponseNotification
 import com.keelim.comssa.data.api.response.ResponseSheet
 import retrofit2.Response
 import retrofit2.http.GET
@@ -26,4 +27,6 @@ interface ApiService {
     suspend fun getData(): String
     @GET
     suspend fun getSheetData(@Url url:String = BuildConfig.BASE_URL): Response<ResponseSheet>
+    @GET
+    suspend fun getNotification(@Url rul:String = BuildConfig.VERSION): Response<ResponseNotification>
 }
