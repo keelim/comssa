@@ -21,13 +21,13 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.webkit.URLUtil
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.keelim.comssa.R
 import com.keelim.comssa.databinding.ActivityMainBinding
 import com.keelim.comssa.databinding.ItemPasswordBinding
@@ -62,25 +62,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() = with(binding) {
-        val fragmentList = listOf(
-            SearchFragment(),
-            SearchFragment(),
-            SearchFragment(),
-            SearchFragment(),
-            FilterFragment()
-        )
-        viewPagerAdapter.fragmentList.addAll(fragmentList)
-        viewpagerMain.adapter = viewPagerAdapter
-
-        viewpagerMain.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                binding.bottomNavigationMain.menu.getItem(position).isChecked = true
+        viewpagerMain.apply {
+            adapter = viewPagerAdapter.apply {
+                fragmentList.addAll(listOf(
+                    SearchFragment(),
+                    SearchFragment(),
+                    SearchFragment(),
+                    SearchFragment(),
+                    FilterFragment()
+                ))
             }
-        })
+            registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    binding.bottomNavigationMain.menu.getItem(position).isChecked = true
+                }
+            })
+        }
 
-        binding.bottomNavigationMain.setOnItemSelectedListener {
-            binding.viewpagerMain.currentItem = when (it.itemId) {
+        bottomNavigationMain.setOnItemSelectedListener {
+            viewpagerMain.currentItem = when (it.itemId) {
                 R.id.menu_feed -> FEED_FRAGMENT
                 R.id.menu_recommend -> RECOMMEND_FRAGMENT
                 R.id.menu_write -> WRITE_FRAGMENT
@@ -89,12 +90,11 @@ class MainActivity : AppCompatActivity() {
             }
             return@setOnItemSelectedListener true
         }
+        bottomNavigationMain.itemIconTintList = null
 
         imageviewMainWrite.setOnClickListener {
             viewpagerMain.currentItem = WRITE_FRAGMENT
         }
-
-        bottomNavigationMain.itemIconTintList = null
     }
 
     private fun fileChecking() {
@@ -107,18 +107,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun databaseDownloadAlertDialog() {
         val itemPassword = ItemPasswordBinding.inflate(layoutInflater)
-        AlertDialog.Builder(this)
+        MaterialAlertDialogBuilder(this)
             .setTitle("다운로드 요청")
             .setView(itemPassword.root)
             .setMessage("어플리케이션 사용을 위해 데이터베이스를 다운로드 합니다.")
             .setPositiveButton("ok") { dialog, which ->
                 if(itemPassword.password.text.toString() == getString(R.string.password)){
                     toast("서버로부터 데이터 베이스를 요청 합니다.")
-                    downloadDatabase()
-                } else{
-                    toast("디폴트 데이터베이스를 다운로드 받습니다.")
-                    downloadDatabase()
                 }
+                downloadDatabase()
             }
             .show()
     }

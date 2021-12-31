@@ -21,19 +21,20 @@ import com.keelim.comssa.data.preference.PreferenceManager
 import com.keelim.comssa.di.IoDispatcher
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 
 class UserRepositoryImpl @Inject constructor(
   private val userApi: UserApi,
   private val preferenceManager: PreferenceManager,
   @IoDispatcher private val dispatcher: CoroutineDispatcher,
 ) : UserRepository {
-  override suspend fun getUser(): User? {
-    return preferenceManager.getString(KEY_USER_ID)?.let {
+  override suspend fun getUser(): User?  = withContext(dispatcher) {
+    return@withContext preferenceManager.getString(KEY_USER_ID)?.let {
       User(it)
     }
   }
 
-  override suspend fun saveUser(user: User) {
+  override suspend fun saveUser(user: User)  = withContext(dispatcher){
     val newvie = userApi.saveUser(user)
     preferenceManager.putString(KEY_USER_ID, newvie.id!!)
   }
