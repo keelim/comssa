@@ -26,7 +26,7 @@ android {
     val BASE_URL: String = gradleLocalProperties(rootDir).getProperty("BASE_URL")
     val VERSION: String = gradleLocalProperties(rootDir).getProperty("VERSION")
     buildTypes {
-        defaultConfig{
+        defaultConfig {
             buildConfigField("String", "BASE_URL", BASE_URL)
             buildConfigField("String", "VERSION", VERSION)
         }
@@ -41,7 +41,7 @@ dependencies {
     implementation(platform(Firebase.platform))
     implementation(Firebase.storage)
     implementation(Firebase.database)
-    implementation(Firebase.firestore   )
+    implementation(Firebase.firestore)
 
     implementation(AndroidX.core_ktx)
 

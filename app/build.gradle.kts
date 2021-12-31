@@ -23,7 +23,7 @@ android {
     val APPLICATION_ID: String = gradleLocalProperties(rootDir).getProperty("APPLICATION_ID")
     val SPLASH_UNIT: String = gradleLocalProperties(rootDir).getProperty("SPLASH_UNIT")
     buildTypes {
-        defaultConfig{
+        defaultConfig {
             buildConfigField("String", "AD_OPEN_ID", AD_OPEN_ID)
             buildConfigField("String", "SPLASH_UNIT", SPLASH_UNIT)
             manifestPlaceholders["APPLICATION_ID"] = APPLICATION_ID
