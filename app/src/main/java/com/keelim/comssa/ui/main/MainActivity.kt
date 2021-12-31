@@ -34,6 +34,7 @@ import com.keelim.comssa.databinding.ItemPasswordBinding
 import com.keelim.comssa.di.download.DownloadReceiver
 import com.keelim.comssa.di.download.DownloadRequest
 import com.keelim.comssa.extensions.toast
+import com.keelim.comssa.ui.main.filter.FilterFragment
 import com.keelim.comssa.ui.main.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             SearchFragment(),
             SearchFragment(),
             SearchFragment(),
-            SearchFragment()
+            FilterFragment()
         )
         viewPagerAdapter.fragmentList.addAll(fragmentList)
         viewpagerMain.adapter = viewPagerAdapter

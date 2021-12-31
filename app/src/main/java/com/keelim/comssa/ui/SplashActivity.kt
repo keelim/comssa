@@ -22,6 +22,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
@@ -30,8 +31,6 @@ import com.keelim.comssa.BuildConfig
 import com.keelim.comssa.databinding.ActivitySplashBinding
 import com.keelim.comssa.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -42,9 +41,7 @@ class SplashActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySplashBinding.inflate(layoutInflater) }
 
     private val test = "ca-app-pub-3940256099942544/1033173712"
-
     private infix fun String.or(that: String): String = if (BuildConfig.DEBUG) this else that
-    private val scope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,16 +63,11 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        scope.cancel()
-    }
-
     private fun showAd() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
             this,
-            test or "ca-app-pub-3115620439518585/4013096159",
+            test or BuildConfig.SPLASH_UNIT,
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -125,12 +117,10 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun goNext() {
-        scope.launch {
-            delay(1500)
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-            finish()
-        }
+    private fun goNext() = lifecycleScope.launch{
+        delay(1500)
+        startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+        finish()
     }
 
     override fun onBackPressed() {}
