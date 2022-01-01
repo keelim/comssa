@@ -23,25 +23,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.keelim.comssa.BuildConfig
 import com.keelim.comssa.databinding.ActivitySplashBinding
 import com.keelim.comssa.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
-    private var mInterstitialAd: InterstitialAd? = null
     private val binding by lazy { ActivitySplashBinding.inflate(layoutInflater) }
-
-    private val test = "ca-app-pub-3940256099942544/1033173712"
-    private infix fun String.or(that: String): String = if (BuildConfig.DEBUG) this else that
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,35 +47,10 @@ class SplashActivity : AppCompatActivity() {
             permissions.plus(Manifest.permission.FOREGROUND_SERVICE)
         }
         if (hasPermissions(permissions)) { // 권한이 있는 경우
-            showAd()
+            goNext()
         } else {
             ActivityCompat.requestPermissions(this, permissions, MULTIPLE_PERMISSIONS)
         }
-    }
-
-    private fun showAd() {
-        val adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(
-            this,
-            test or BuildConfig.SPLASH_UNIT,
-            adRequest,
-            object : InterstitialAdLoadCallback() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    super.onAdFailedToLoad(adError)
-                    Timber.d(adError.message)
-                    mInterstitialAd = null
-                    goNext()
-                }
-
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    super.onAdLoaded(interstitialAd)
-                    Timber.d("Ad was loaded.")
-                    mInterstitialAd = interstitialAd
-                    mInterstitialAd!!.show(this@SplashActivity)
-                    goNext()
-                }
-            }
-        )
     }
 
     private fun hasPermissions(permissions: Array<String>): Boolean {
@@ -100,7 +65,6 @@ class SplashActivity : AppCompatActivity() {
         return true
     }
 
-    // 권한 요청에 대한 결과 처리
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -118,7 +82,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun goNext() = lifecycleScope.launch{
-        delay(1500)
+        delay(3000)
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         finish()
     }

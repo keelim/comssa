@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.keelim.comssa.domain
+package com.keelim.comssa.ui.main.favorite
 
-import com.keelim.comssa.data.model.Review
-import com.keelim.comssa.data.repository.ReviewRepository
-import javax.inject.Inject
+import com.keelim.comssa.data.db.entity.Search
 
-class DeleteReviewUseCase @Inject constructor(
-    private val reviewRepository: ReviewRepository
-) {
-    suspend operator fun invoke(review: Review) =
-        reviewRepository.removeReview(review)
+sealed class FavoriteState {
+    object UnInitialized : FavoriteState()
+    data class Success(
+        val data: List<Search>
+    ) : FavoriteState()
+
+    object Loading : FavoriteState()
+    object Error : FavoriteState()
 }

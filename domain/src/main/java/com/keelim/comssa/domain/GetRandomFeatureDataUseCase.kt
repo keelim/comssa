@@ -29,7 +29,7 @@ class GetRandomFeatureDataUseCase @Inject constructor(
             .filter { it.id.isNullOrBlank().not() }
             .filter { it.isFeatured == true }
 
-        if (featuredDatas.isNullOrEmpty()) {
+        if (featuredDatas.isEmpty()) {
             return null
         }
 

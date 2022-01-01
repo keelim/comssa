@@ -18,25 +18,29 @@ package com.keelim.comssa.ui.main.filter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keelim.comssa.data.db.entity.Search
+import com.keelim.comssa.domain.FavoriteUseCase
 import com.keelim.comssa.domain.SearchUseCase
-import com.keelim.comssa.domain.UpdateFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class FilterViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase,
-    private val updateFavoriteUseCase: UpdateFavoriteUseCase,
+    private val favoriteUseCase: FavoriteUseCase,
 ) : ViewModel() {
     private var _state: MutableStateFlow<FilterState> = MutableStateFlow(FilterState.UnInitialized)
     val state: StateFlow<FilterState>
         get() = _state
 
     private val data: MutableStateFlow<List<Search>> = MutableStateFlow(emptyList())
-    private val filter: MutableStateFlow<String> = MutableStateFlow("")
+    private val filter: MutableStateFlow<List<Search>> = MutableStateFlow(emptyList())
 
     init {
         getInitData()
@@ -44,8 +48,8 @@ class FilterViewModel @Inject constructor(
 
     fun favorite(favorite: Int, id: Int) = viewModelScope.launch {
         when (favorite) {
-            0 -> updateFavoriteUseCase.invoke(1, id)
-            1 -> updateFavoriteUseCase.invoke(0, id)
+            0 -> favoriteUseCase.update(1, id)
+            1 -> favoriteUseCase.update(0, id)
         }
     }
 
@@ -67,5 +71,30 @@ class FilterViewModel @Inject constructor(
                 it.message!!
             )
         }
+    }
+
+    fun filter(query: String) {
+        data
+            .onStart {
+                _state.emit(
+                    FilterState.UnInitialized
+                )
+            }
+            .onEach { searches ->
+                _state.emit(
+                    FilterState.Loading
+                )
+                val temp = searches.filter { it.category!!.contains(query) }
+                _state.emit(
+                    FilterState.Success(
+                        temp
+                    )
+                )
+            }
+            .catch {
+                it.printStackTrace()
+                _state.emit(FilterState.Error("에러가 발생하였습니다."))
+            }
+            .launchIn(viewModelScope)
     }
 }

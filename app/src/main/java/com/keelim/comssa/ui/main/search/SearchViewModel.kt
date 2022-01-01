@@ -20,8 +20,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.keelim.comssa.data.db.entity.Search
+import com.keelim.comssa.domain.FavoriteUseCase
 import com.keelim.comssa.domain.SearchUseCase
-import com.keelim.comssa.domain.UpdateFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -31,13 +31,13 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchUseCase: SearchUseCase,
-    private val updateFavoriteUseCase: UpdateFavoriteUseCase,
+    private val favoriteUseCase: FavoriteUseCase,
 ) : ViewModel() {
     val downloadLink:MutableStateFlow<String> = MutableStateFlow("")
     fun favorite(favorite: Int, id: Int) = viewModelScope.launch {
         when (favorite) {
-            0 -> updateFavoriteUseCase.invoke(1, id)
-            1 -> updateFavoriteUseCase.invoke(0, id)
+            0 -> favoriteUseCase.update(1, id)
+            1 -> favoriteUseCase.update(0, id)
         }
     }
 

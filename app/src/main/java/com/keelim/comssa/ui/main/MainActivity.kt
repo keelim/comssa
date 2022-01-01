@@ -27,13 +27,21 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
+import com.keelim.comssa.BuildConfig
 import com.keelim.comssa.R
 import com.keelim.comssa.databinding.ActivityMainBinding
 import com.keelim.comssa.databinding.ItemPasswordBinding
 import com.keelim.comssa.di.download.DownloadReceiver
 import com.keelim.comssa.di.download.DownloadRequest
-import com.keelim.comssa.extensions.toast
+import com.keelim.comssa.utils.toast
+import com.keelim.comssa.ui.feed.FeedFragment
+import com.keelim.comssa.ui.main.bottom_sheet.BottomSheetDialog
 import com.keelim.comssa.ui.main.filter.FilterFragment
 import com.keelim.comssa.ui.main.search.SearchFragment
 import com.keelim.comssa.ui.notification.NotificationFragment
@@ -41,6 +49,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -49,17 +58,20 @@ class MainActivity : AppCompatActivity() {
     private val viewPagerAdapter by lazy {
         MainViewPagerAdapter(this)
     }
+    private var mInterstitialAd: InterstitialAd? = null
     @Inject
     lateinit var recevier: DownloadReceiver
     @Inject
     lateinit var downloadRequest: DownloadRequest
 
+    private val test = "ca-app-pub-3940256099942544/1033173712"
+    private infix fun String.or(that: String): String = if (BuildConfig.DEBUG) this else that
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        showAd()
         setContentView(binding.root)
         initViews()
-        fileChecking()
-        observeDownloadLink()
     }
 
     private fun initViews() = with(binding) {
@@ -67,8 +79,8 @@ class MainActivity : AppCompatActivity() {
             adapter = viewPagerAdapter.apply {
                 fragmentList.addAll(listOf(
                     SearchFragment(),
-                    SearchFragment(),
-                    SearchFragment(),
+                    FeedFragment(),
+                    BottomSheetDialog(),
                     NotificationFragment(),
                     FilterFragment()
                 ))
@@ -103,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         if (check.exists().not())
             databaseDownloadAlertDialog()
         else
-            toast("데이터베이스가 존재합니다. 그대로 진행 합니다")
+            Snackbar.make(binding.root, "데이터베이스가 존재합니다. 그대로 진행 합니다", Snackbar.LENGTH_SHORT).show()
     }
 
     private fun databaseDownloadAlertDialog() {
@@ -138,6 +150,31 @@ class MainActivity : AppCompatActivity() {
                 downloadDatabase(it)
             }
         }
+    }
+
+    private fun showAd() {
+        val adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(
+            this,
+            test or BuildConfig.SPLASH_UNIT,
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    super.onAdFailedToLoad(adError)
+                    Timber.d(adError.message)
+                    mInterstitialAd = null
+                    fileChecking()
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    super.onAdLoaded(interstitialAd)
+                    Timber.d("Ad was loaded.")
+                    mInterstitialAd = interstitialAd
+                    mInterstitialAd!!.show(this@MainActivity)
+                    fileChecking()
+                }
+            }
+        )
     }
 
     private companion object {

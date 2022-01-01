@@ -9,8 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.keelim.common.repeatCallDefaultOnStarted
+import com.keelim.comssa.R
 import com.keelim.comssa.databinding.FragmentFilterBinding
-import com.keelim.comssa.extensions.toast
+import com.keelim.comssa.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
@@ -21,8 +22,8 @@ class FilterFragment: Fragment() {
     private val binding get() = _binding!!
     private val viewModel:FilterViewModel by viewModels()
     private val itemAdapter = FilterAdapter { favorite, id ->
-            viewModel.favorite(favorite, id)
-            requireContext().toast("관심 목록에 등록을 하였습니다.")
+        viewModel.favorite(favorite, id)
+        requireContext().toast("관심 목록에 등록을 하였습니다.")
     }
 
     override fun onCreateView(
@@ -50,8 +51,18 @@ class FilterFragment: Fragment() {
         recycler.apply {
             adapter = itemAdapter
             layoutManager = LinearLayoutManager(requireContext())
+            snap.attachToRecyclerView(this)
         }
-        snap.attachToRecyclerView(recycler)
+        checkContainer.setOnCheckedChangeListener { group, id ->
+            when(id){
+                R.id.chip_algorithms -> viewModel.filter("알고리즘")
+                R.id.chip_db -> viewModel.filter("데이터베이스")
+                R.id.chip_network -> viewModel.filter("네트워크")
+                R.id.chip_ds -> viewModel.filter("자료구조")
+                R.id.chip_os -> viewModel.filter("운영체제")
+                R.id.chip_android -> viewModel.filter("안드로이드")
+            }
+        }
     }
 
     private fun observeState() = viewLifecycleOwner.repeatCallDefaultOnStarted {

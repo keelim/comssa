@@ -27,12 +27,14 @@ import javax.inject.Inject
 class MyApplication : Application() {
     @Inject
     lateinit var componentLogger: ComponentLogger
+    @Inject
+    lateinit var appOpenManager: AppOpenManager
 
     override fun onCreate() {
         super.onCreate()
         componentLogger.initialize(this)
+        appOpenManager.initialize(this)
         MobileAds.initialize(this) {}
-        AppOpenManager(this)
         DynamicColors.applyToActivitiesIfAvailable(this)
     }
 }

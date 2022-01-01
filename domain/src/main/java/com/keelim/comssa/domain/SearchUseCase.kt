@@ -50,10 +50,6 @@ class SearchUseCase @Inject constructor(
         return ioRepository.getContentItemsByPaging(query)
     }
 
-    fun getFavorite(): Flow<PagingData<Search>> {
-        return ioRepository.getFavoriteItemsByPaging()
-    }
-
     suspend fun getDownloadLink(password: String): PasswordResult {
         return ioRepository.getDownloadLink(password)
     }

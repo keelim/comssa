@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.keelim.comssa.ui.favorite
+package com.keelim.comssa.ui.main.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.keelim.comssa.data.db.entity.Search
-import com.keelim.comssa.domain.GetFavoriteUseCase
+import com.keelim.comssa.domain.FavoriteUseCase
 import com.keelim.comssa.domain.SearchUseCase
-import com.keelim.comssa.domain.UpdateFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -30,19 +29,17 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
-    private val updateFavoriteUseCase: UpdateFavoriteUseCase,
-    private val getFavoriteUseCase: GetFavoriteUseCase,
-    private val searchUseCase: SearchUseCase
+    private val favoriteUseCase: FavoriteUseCase,
 ) : ViewModel() {
     fun favorite(favorite: Int, id: Int) = viewModelScope.launch {
         when (favorite) {
-            1 -> updateFavoriteUseCase.invoke(0, id)
-            0 -> updateFavoriteUseCase.invoke(1, id)
+            1 -> favoriteUseCase.update(0, id)
+            0 -> favoriteUseCase.update(1, id)
         }
     }
 
     fun getFavorite(): Flow<PagingData<Search>> {
-        return searchUseCase.getFavorite()
+        return favoriteUseCase.getFavorite()
             .cachedIn(viewModelScope)
     }
 }

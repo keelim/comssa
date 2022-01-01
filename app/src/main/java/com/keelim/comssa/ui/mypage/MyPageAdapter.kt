@@ -24,7 +24,7 @@ import com.keelim.comssa.R
 import com.keelim.comssa.data.model.Data
 import com.keelim.comssa.data.model.ReviewedData
 import com.keelim.comssa.databinding.ItemReviewedDataBinding
-import com.keelim.comssa.extensions.toDecimalFormatString
+import com.keelim.comssa.utils.toDecimalFormatString
 
 class MyPageAdapter(
     var onDataClickListener: (Data) -> Unit

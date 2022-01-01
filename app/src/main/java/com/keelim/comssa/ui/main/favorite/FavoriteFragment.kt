@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.keelim.comssa.ui.favorite
+package com.keelim.comssa.ui.main.favorite
 
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.keelim.comssa.databinding.ActivityFavoriteBinding
+import com.keelim.comssa.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FavoriteActivity : AppCompatActivity() {
-    private val binding by lazy { ActivityFavoriteBinding.inflate(layoutInflater) }
+class FavoriteFragment : Fragment() {
+    private var _binding: FragmentFavoriteBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: FavoriteViewModel by viewModels()
-    private val favoriteAdapter:FavoriteAdapter by lazy{
+    private val favoriteAdapter: FavoriteAdapter by lazy {
         FavoriteAdapter(
             favoriteListener = { favorite, id ->
                 viewModel.favorite(favorite, id)
@@ -40,14 +41,14 @@ class FavoriteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
-        favorite()
+        observeState()
     }
 
     private fun initViews() = with(binding) {
         favoriteRecycler.adapter = favoriteAdapter
     }
 
-    private fun favorite() = lifecycleScope.launch {
+    private fun observeState() = lifecycleScope.launch {
         viewModel.getFavorite().collectLatest {
             favoriteAdapter.submitData(it)
         }

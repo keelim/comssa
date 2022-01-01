@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.keelim.comssa.ui.favorite
+package com.keelim.comssa.ui.main.favorite
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

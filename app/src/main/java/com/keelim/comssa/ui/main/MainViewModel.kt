@@ -35,7 +35,6 @@ class MainViewModel @Inject constructor(
         }.onSuccess {
             if(it.flag){
                 downloadLink.emit(it.password)
-
             }
         }
     }

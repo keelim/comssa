@@ -29,8 +29,8 @@ import com.keelim.comssa.databinding.ItemDataInformationBinding
 import com.keelim.comssa.databinding.ItemMyReviewBinding
 import com.keelim.comssa.databinding.ItemReviewBinding
 import com.keelim.comssa.databinding.ItemReviewFormBinding
-import com.keelim.comssa.extensions.toAbbreviatedString
-import com.keelim.comssa.extensions.toDecimalFormatString
+import com.keelim.comssa.utils.toAbbreviatedString
+import com.keelim.comssa.utils.toDecimalFormatString
 
 class ReviewsAdapter(
     private val movie: Data,

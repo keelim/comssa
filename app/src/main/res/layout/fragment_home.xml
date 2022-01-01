@@ -12,6 +12,7 @@
         android:clipToPadding="false"
         android:overScrollMode="never"
         android:paddingVertical="6dp"
+        tools:listitem="@layout/item_featured_data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

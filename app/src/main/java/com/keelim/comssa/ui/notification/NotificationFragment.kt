@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.keelim.common.repeatCallDefaultOnStarted
 import com.keelim.comssa.databinding.FragmentNotificationBinding
-import com.keelim.comssa.extensions.toast
+import com.keelim.comssa.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 

@@ -14,8 +14,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.keelim.comssa.databinding.FragmentSearchBinding
-import com.keelim.comssa.extensions.toast
 import com.keelim.comssa.provides.SuggestionProvider
+import com.keelim.comssa.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

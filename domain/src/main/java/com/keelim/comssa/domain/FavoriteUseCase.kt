@@ -15,18 +15,25 @@
  */
 package com.keelim.comssa.domain
 
+import androidx.paging.PagingData
 import com.keelim.comssa.data.db.entity.Search
 import com.keelim.comssa.data.repository.IoRepository
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
-class GetFavoriteUseCase @Inject constructor(
+class FavoriteUseCase @Inject constructor(
     private val ioRepository: IoRepository,
 ) {
 
-    suspend operator fun invoke(): List<Search> {
-        return ioRepository.getFavorite()
+    suspend operator fun invoke(favorite: Int, id: Int) {
+        ioRepository.updateFavorite(favorite, id)
     }
 
-    fun getFavorite(): Flow<List<Search>> = ioRepository.favoriteFlow
+    suspend fun update(favorite: Int, id:Int){
+        ioRepository.updateFavorite(favorite, id)
+    }
+
+    fun getFavorite(): Flow<PagingData<Search>> {
+        return ioRepository.getFavoriteItemsByPaging()
+    }
 }

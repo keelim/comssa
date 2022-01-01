@@ -29,9 +29,9 @@ import com.keelim.comssa.data.model.Data
 import com.keelim.comssa.data.model.FeaturedData
 import com.keelim.comssa.databinding.ItemDataBinding
 import com.keelim.comssa.databinding.ItemFeaturedDataBinding
-import com.keelim.comssa.extensions.dip
-import com.keelim.comssa.extensions.toAbbreviatedString
-import com.keelim.comssa.extensions.toDecimalFormatString
+import com.keelim.comssa.utils.dip
+import com.keelim.comssa.utils.toAbbreviatedString
+import com.keelim.comssa.utils.toDecimalFormatString
 
 class HomeAdapter(
     val onDataClickListener: (Data) -> Unit

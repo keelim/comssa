@@ -5,37 +5,44 @@
     android:layout_height="match_parent"
     android:padding="8dp">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Bottom Sheet"
-        android:textColor="@android:color/black"
-        android:textSize="36sp"
+    <View
+        android:id="@+id/line"
+        android:layout_width="60dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textView5"
+        style="?attr/textAppearanceHeadline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comssa"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/desc"
+        style="?attr/textAppearanceBody1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가장 똑똑하게 공부하는 방법"
+        app:layout_constraintStart_toStartOf="@id/textView5"
+        app:layout_constraintTop_toBottomOf="@id/textView5" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/opensource"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="오픈 소스"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/download_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
-        android:text="데이터베이스를 확인합니다."
-        app:layout_constraintStart_toStartOf="@+id/opensource"
-        app:layout_constraintTop_toBottomOf="@+id/opensource" />
+        android:text="오픈 소스"
+        app:layout_constraintStart_toStartOf="@+id/btn_favorite"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_favorite"

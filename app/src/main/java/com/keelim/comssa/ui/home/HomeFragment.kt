@@ -24,9 +24,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.keelim.comssa.databinding.FragmentHomeBinding
-import com.keelim.comssa.extensions.dip
-import com.keelim.comssa.extensions.toGone
-import com.keelim.comssa.extensions.toVisible
+import com.keelim.comssa.utils.dip
+import com.keelim.comssa.utils.toGone
+import com.keelim.comssa.utils.toVisible
 import com.keelim.comssa.ui.home.HomeAdapter.Companion.ITEM_VIEW_TYPE_FEATURED
 import com.keelim.comssa.ui.home.HomeAdapter.Companion.ITEM_VIEW_TYPE_SECTION_HEADER
 import dagger.hilt.android.AndroidEntryPoint
@@ -124,16 +124,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchData() = viewModel.allData.observe(
-        viewLifecycleOwner,
-        {
-            recyclerUpdate()
-        }
-    )
+        viewLifecycleOwner
+    ) {
+        recyclerUpdate()
+    }
 
     private fun fetchRandom() = viewModel.randomData.observe(
-        viewLifecycleOwner,
-        {
-            recyclerUpdate()
-        }
-    )
+        viewLifecycleOwner
+    ) {
+        recyclerUpdate()
+    }
 }
