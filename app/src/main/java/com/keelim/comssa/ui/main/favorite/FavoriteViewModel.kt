@@ -21,10 +21,10 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.keelim.comssa.data.db.entity.Search
 import com.keelim.comssa.domain.FavoriteUseCase
-import com.keelim.comssa.domain.SearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -39,7 +39,11 @@ class FavoriteViewModel @Inject constructor(
     }
 
     fun getFavorite(): Flow<PagingData<Search>> {
-        return favoriteUseCase.getFavorite()
+        return favoriteUseCase
+            .getFavorite()
+            .catch {
+                it.printStackTrace()
+            }
             .cachedIn(viewModelScope)
     }
 }

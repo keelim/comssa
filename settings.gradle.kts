@@ -1,7 +1,7 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     val agpVersion = "7.4.0"
-    val kotlinVersion = "1.5.31"
+    val kotlinVersion = "1.6.0"
 
     repositories {
         gradlePluginPortal()
@@ -11,11 +11,11 @@ pluginManagement {
     plugins {
         id("com.android.application") version agpVersion
         id("com.android.library") version agpVersion
-        id("org.jetbrains.kotlin.android") version "1.6.0"
+        id("org.jetbrains.kotlin.android") version kotlinVersion
         id("org.jetbrains.kotlin.jvm") version kotlinVersion
         id("org.jetbrains.kotlin.kapt") version kotlinVersion
         id("org.jetbrains.kotlin.parcelize") version kotlinVersion
-        id("com.google.devtools.ksp") version "${kotlinVersion}-1.0.0"
+        id("com.google.devtools.ksp") version "1.5.31-1.0.0"
     }
     resolutionStrategy {
         eachPlugin {

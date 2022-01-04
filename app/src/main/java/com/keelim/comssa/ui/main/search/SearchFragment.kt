@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import com.keelim.comssa.R
 import com.keelim.comssa.databinding.FragmentSearchBinding
 import com.keelim.comssa.provides.SuggestionProvider
 import com.keelim.comssa.utils.toast
@@ -29,6 +30,9 @@ class SearchFragment: Fragment() {
             viewModel.favorite(favorite, id)
             requireContext().toast("관심 목록에 등록을 하였습니다.")
     }
+
+    private var checked:String = ""
+    private var queryed:String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,7 +58,8 @@ class SearchFragment: Fragment() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean = true
                 override fun onQueryTextChange(query: String): Boolean  {
-                    search2(query.replace("\\s", ""))
+                    queryed = query.replace("\\s", "")
+                    search2()
                     return true
                 }
             })
@@ -78,13 +83,23 @@ class SearchFragment: Fragment() {
             snap.attachToRecyclerView(this)
         }
 
-        bottomButton.setOnClickListener {
-            requireContext().toast("기능 준비중 입니다. 조금만 기다려주세요.")
+        checkContainer.setOnCheckedChangeListener { group, id ->
+            checked = when(id){
+                R.id.chip_algorithms -> "알고리즘"
+                R.id.chip_db -> "데이터베이스"
+                R.id.chip_network -> "네트워크"
+                R.id.chip_ds -> "자료구조"
+                R.id.chip_os -> "운영체제"
+                R.id.chip_android -> "안드로이드"
+                R.id.chip_personality -> "인성"
+                else -> ""
+            }
+            search2()
         }
     }
 
-    private fun search2(query: String) = lifecycleScope.launch {
-        viewModel.getContent(query).collectLatest {
+    private fun search2() = lifecycleScope.launch {
+        viewModel.getContent(queryed, checked).collectLatest {
             itemAdapter.submitData(it)
         }
     }

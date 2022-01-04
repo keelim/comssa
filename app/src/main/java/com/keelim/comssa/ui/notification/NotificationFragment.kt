@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.keelim.common.repeatCallDefaultOnStarted
 import com.keelim.comssa.databinding.FragmentNotificationBinding
+import com.keelim.comssa.utils.toGone
+import com.keelim.comssa.utils.toVisible
 import com.keelim.comssa.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -70,10 +72,10 @@ class NotificationFragment: Fragment() {
     }
 
     private fun loadingOn() {
-        binding.loading.visibility = View.VISIBLE
+        binding.loading.toVisible()
     }
 
     private fun loadingOff(){
-        binding.loading.visibility = View.GONE
+        binding.loading.toGone()
     }
 }

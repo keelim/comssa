@@ -1,38 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_section"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        app:layout_constraintBottom_toTopOf="@id/chip_group"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/chip_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_section">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/check_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            app:chipSpacingHorizontal="5dp"
+            app:singleSelection="true"
+
+            app:chipSpacingVertical="5dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_algorithms"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Algorithms" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_db"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DB" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_network"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Network" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_ds"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DataStructure" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_os"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OS" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_android"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Android" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_personality"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인성" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/item_search"
-        app:layout_constraintBottom_toTopOf="@id/bottom_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_section" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bottom_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="show bottom sheet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recycler" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/chip_group"
+        tools:listitem="@layout/item_search" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

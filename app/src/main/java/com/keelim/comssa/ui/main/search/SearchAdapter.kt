@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.keelim.comssa.data.db.entity.Search
 import com.keelim.comssa.databinding.ItemSearchBinding
+import com.keelim.comssa.utils.toGone
+import com.keelim.comssa.utils.toVisible
 
 class SearchAdapter(
     private val favoriteListener: (Int, Int) -> Unit
@@ -32,17 +34,22 @@ class SearchAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Search) = with(binding) {
             title.text = item.title
-            description.text = if(item.description.isNullOrEmpty()){
+            description.text = if(item.description == null){
                 "아직 설명 자료가 없네요."
             } else{
                 item.description
             }
+
             favoriteSwitch.isChecked = item.favorite == 1
             favoriteSwitch.setOnClickListener {
                 favoriteListener.invoke(item.favorite, item.id)
             }
             root.setOnClickListener {
-                description.visibility = View.VISIBLE
+                if(description.visibility == View.VISIBLE){
+                    description.toGone()
+                } else{
+                    description.toVisible()
+                }
             }
         }
     }

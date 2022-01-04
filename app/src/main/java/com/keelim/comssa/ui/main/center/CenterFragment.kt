@@ -13,29 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.keelim.comssa.ui.main.bottom_sheet
+package com.keelim.comssa.ui.main.center
 
+import android.app.DownloadManager
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.keelim.comssa.databinding.BottomSheetDialogBinding
+import com.keelim.comssa.data.model.main.center.centerData
+import com.keelim.comssa.databinding.FragmentCenterBinding
+import com.keelim.comssa.di.download.DownloadReceiver
+import com.keelim.comssa.di.download.DownloadRequest
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class BottomSheetDialog : BottomSheetDialogFragment() {
-    private var _binding: BottomSheetDialogBinding? = null
+class CenterFragment : Fragment() {
+    private var _binding: FragmentCenterBinding? = null
     private val binding get() = _binding!!
+    @Inject
+    lateinit var recevier: DownloadReceiver
+    @Inject
+    lateinit var downloadRequest: DownloadRequest
+    private val centerAdapter by lazy {
+        CenterAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = BottomSheetDialogBinding.inflate(layoutInflater)
+        _binding = FragmentCenterBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -52,6 +66,27 @@ class BottomSheetDialog : BottomSheetDialogFragment() {
     private fun initViews() = with(binding) {
         opensource.setOnClickListener {
             startActivity(Intent(requireContext(), OssLicensesMenuActivity::class.java))
+        }
+        recyclerCenter.apply {
+            adapter = centerAdapter.apply {
+                submitList(centerData)
+            }
+        }
+        btnDownload.setOnClickListener{
+            downloadDatabase()
+        }
+    }
+
+    private fun downloadDatabase(link: String? = null) {
+        with(requireContext()){
+            val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            registerReceiver(recevier, IntentFilter().apply {
+                addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+                addAction(DownloadManager.ACTION_NOTIFICATION_CLICKED)
+            })
+            downloadManager.enqueue(
+                downloadRequest.provideDownloadRequest(link)
+            )
         }
     }
 }

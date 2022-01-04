@@ -46,9 +46,10 @@ class SearchUseCase @Inject constructor(
         return ioRepository.getSearch(keyword.orEmpty())
     }
 
-    fun getContent(query: String = ""): Flow<PagingData<Search>> {
-        return ioRepository.getContentItemsByPaging(query)
-    }
+    fun getContent(
+        query: String,
+        category: String,
+    ): Flow<PagingData<Search>> = ioRepository.getContentItemsByPaging(query, category)
 
     suspend fun getDownloadLink(password: String): PasswordResult {
         return ioRepository.getDownloadLink(password)

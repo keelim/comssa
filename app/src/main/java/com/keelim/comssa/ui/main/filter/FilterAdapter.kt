@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.keelim.comssa.data.db.entity.Search
 import com.keelim.comssa.databinding.ItemSearchBinding
+import com.keelim.comssa.utils.toGone
+import com.keelim.comssa.utils.toVisible
 
 class FilterAdapter(
     private val favoriteListener: (Int, Int) -> Unit
@@ -42,7 +44,11 @@ class FilterAdapter(
                 favoriteListener.invoke(item.favorite, item.id)
             }
             root.setOnClickListener {
-                description.visibility = View.VISIBLE
+                if(description.visibility == View.VISIBLE){
+                    description.toGone()
+                } else{
+                    description.toVisible()
+                }
             }
         }
     }

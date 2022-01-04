@@ -53,10 +53,10 @@ class IoRepositoryImpl @Inject constructor(
   override val favoriteFlow: Flow<List<Search>>
     get() = db.searchDao.getFavorite2()
 
-  override fun getContentItemsByPaging(query: String): Flow<PagingData<Search>> {
+  override fun getContentItemsByPaging(query: String, category:String): Flow<PagingData<Search>> {
     return Pager(
       config = PagingConfig(pageSize = 10),
-      pagingSourceFactory = { SearchPagingSource(db.searchDao, query) }
+      pagingSourceFactory = { SearchPagingSource(db.searchDao, query, category) }
     ).flow
   }
 

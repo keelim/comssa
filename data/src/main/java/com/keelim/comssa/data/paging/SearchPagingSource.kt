@@ -8,12 +8,17 @@ import com.keelim.comssa.data.db.entity.Search
 class SearchPagingSource(
     private val dao: SearchDao,
     private val query:String,
+    private val category: String,
 ): PagingSource<Int, Search>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Search> {
         val page = params.key ?: 1
         return try {
-            val items = dao.getSearchContentsByPaging(query, page, params.loadSize)
+            val items = if(category.isEmpty()){
+                dao.getSearchContentsByPaging(query, page, params.loadSize)
+            } else{
+                dao.getSearchContentsByPagingCategory(query, category, page, params.loadSize)
+            }
             LoadResult.Page(
                 data = items,
                 prevKey = if (page == 1) null else page - 1,

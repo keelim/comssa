@@ -41,7 +41,7 @@ import com.keelim.comssa.di.download.DownloadReceiver
 import com.keelim.comssa.di.download.DownloadRequest
 import com.keelim.comssa.utils.toast
 import com.keelim.comssa.ui.feed.FeedFragment
-import com.keelim.comssa.ui.main.bottom_sheet.BottomSheetDialog
+import com.keelim.comssa.ui.main.center.CenterFragment
 import com.keelim.comssa.ui.main.filter.FilterFragment
 import com.keelim.comssa.ui.main.search.SearchFragment
 import com.keelim.comssa.ui.notification.NotificationFragment
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                 fragmentList.addAll(listOf(
                     SearchFragment(),
                     FeedFragment(),
-                    BottomSheetDialog(),
+                    CenterFragment(),
                     NotificationFragment(),
                     FilterFragment()
                 ))
