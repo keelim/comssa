@@ -12,11 +12,13 @@
         android:clipToPadding="false"
         android:overScrollMode="never"
         android:paddingVertical="6dp"
-        tools:listitem="@layout/item_featured_data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/item_featured_data" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/errorDescriptionTextView"

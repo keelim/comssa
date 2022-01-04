@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="naver_green">#60d171</color>
+
+    <color name="gray_99">#999999</color>
+    <color name="c3gray">#c3c3c3</color>
+    <color name="e0gray">#e0e0e0</color>
+    <color name="c4gray">#c4c4c4</color>
+    <color name="d4gray">#d3d3d3</color>
+    <color name="gray_7d">#7d7d7d</color>
+    <!-- feed fragment-->
+    <color name="beige">#fff4e2</color>
+    <color name="ebgray">#ebebeb</color>
+    <color name="f8gray">#f8f8f8</color>
+    <color name="gray_6f">#6f6f6f</color>
+</resources>

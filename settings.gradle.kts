@@ -41,5 +41,6 @@ include(
     ":data",
     ":common",
     ":domain",
-    ":compose"
+    ":compose",
+    ":feature:feed"
 )

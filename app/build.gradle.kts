@@ -39,6 +39,7 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.common)
     implementation(projects.compose)
+    implementation(projects.feature.feed)
 
     implementation(AndroidX.core_ktx)
     implementation(AndroidX.appcompat)
@@ -87,4 +88,3 @@ dependencies {
     androidTestImplementation(AppTest.androidJunit)
     androidTestImplementation(AppTest.espressoCore)
 }
-apply(from = "$rootDir/spotless.gradle")

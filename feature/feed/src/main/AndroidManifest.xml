@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.keelim.feed">
+
+    <application>
+        <activity
+            android:theme="@style/Theme.NaverBlogAndoid"
+            android:name="com.keelim.feed.ui.comment.CommentActivity"
+            android:exported="true"
+            android:parentActivityName="com.keelim.feed.ui.WriterActivity" />
+
+        <activity
+            android:theme="@style/Theme.NaverBlogAndoid"
+            android:name="com.keelim.feed.ui.WriterActivity"
+            android:exported="true" />
+    </application>
+</manifest>

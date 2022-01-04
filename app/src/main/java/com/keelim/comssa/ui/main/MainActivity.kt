@@ -33,18 +33,18 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.keelim.feed.ui.feed.FeedFragment
 import com.keelim.comssa.BuildConfig
 import com.keelim.comssa.R
 import com.keelim.comssa.databinding.ActivityMainBinding
 import com.keelim.comssa.databinding.ItemPasswordBinding
 import com.keelim.comssa.di.download.DownloadReceiver
 import com.keelim.comssa.di.download.DownloadRequest
-import com.keelim.comssa.utils.toast
-import com.keelim.comssa.ui.feed.FeedFragment
 import com.keelim.comssa.ui.main.center.CenterFragment
 import com.keelim.comssa.ui.main.filter.FilterFragment
 import com.keelim.comssa.ui.main.search.SearchFragment
 import com.keelim.comssa.ui.notification.NotificationFragment
+import com.keelim.comssa.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import javax.inject.Inject
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             adapter = viewPagerAdapter.apply {
                 fragmentList.addAll(listOf(
                     SearchFragment(),
-                    FeedFragment(),
+                    FeedFragment.newInstance(),
                     CenterFragment(),
                     NotificationFragment(),
                     FilterFragment()
