@@ -13,7 +13,7 @@ import com.keelim.comssa.data.model.feed.Comment
 import com.keelim.feed.databinding.ItemCommentBinding
 import com.keelim.feed.ui.recommend.RecommendAdapter
 
-class CommentAdapter() : ListAdapter<Comment, CommentAdapter.CommentViewHolder>(diffUtil) {
+class CommentAdapter : ListAdapter<Comment, CommentAdapter.CommentViewHolder>(diffUtil) {
     inner class CommentViewHolder(private val binding: ItemCommentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

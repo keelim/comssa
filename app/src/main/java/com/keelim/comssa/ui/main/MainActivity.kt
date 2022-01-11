@@ -33,7 +33,6 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import com.keelim.feed.ui.feed.FeedFragment
 import com.keelim.comssa.BuildConfig
 import com.keelim.comssa.R
 import com.keelim.comssa.databinding.ActivityMainBinding
@@ -79,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             adapter = viewPagerAdapter.apply {
                 fragmentList.addAll(listOf(
                     SearchFragment(),
-                    FeedFragment.newInstance(),
+                    SearchFragment(),
                     CenterFragment(),
                     NotificationFragment(),
                     FilterFragment()

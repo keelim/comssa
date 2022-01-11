@@ -39,7 +39,7 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.common)
     implementation(projects.compose)
-    implementation(projects.feature.feed)
+//    implementation(projects.feature.feed)
 
     implementation(AndroidX.core_ktx)
     implementation(AndroidX.appcompat)

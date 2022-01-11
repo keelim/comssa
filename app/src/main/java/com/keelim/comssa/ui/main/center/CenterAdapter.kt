@@ -24,8 +24,7 @@ import coil.load
 import com.keelim.comssa.data.model.main.center.Center
 import com.keelim.comssa.databinding.ItemCenterBinding
 
-class CenterAdapter(
-) : ListAdapter<Center, CenterAdapter.ViewHolder>(diffUtil) {
+class CenterAdapter : ListAdapter<Center, CenterAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemCenterBinding) :
         RecyclerView.ViewHolder(binding.root) {

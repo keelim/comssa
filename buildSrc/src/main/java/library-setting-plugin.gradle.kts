@@ -5,4 +5,4 @@ plugins {
     id("kotlin-setting-plugin")
 }
 
-apply(from = "$rootDir/spotless.gradle")
+//apply(from = "$rootDir/spotless.gradle")

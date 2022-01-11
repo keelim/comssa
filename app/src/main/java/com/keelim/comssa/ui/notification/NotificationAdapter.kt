@@ -23,8 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.keelim.comssa.data.model.main.notification.Notification
 import com.keelim.comssa.databinding.ItemNotificationBinding
 
-class NotificationAdapter(
-) : ListAdapter<Notification, NotificationAdapter.ViewHolder>(diffUtil) {
+class NotificationAdapter : ListAdapter<Notification, NotificationAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val binding: ItemNotificationBinding) :
         RecyclerView.ViewHolder(binding.root) {

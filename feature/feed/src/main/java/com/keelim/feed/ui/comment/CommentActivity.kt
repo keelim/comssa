@@ -22,7 +22,7 @@ class CommentActivity : AppCompatActivity() {
         imageViewGoUp.setOnClickListener {
             nestedScrollView.scrollTo(0, 0)
         }
-        imageViewGoBack.setOnClickListener() {
+        imageViewGoBack.setOnClickListener {
             super.onBackPressed()
         }
 

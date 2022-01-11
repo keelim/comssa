@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.keelim.comssa.data.model.feed.Recomment
 import com.keelim.feed.databinding.ItemRecommentBinding
 
-class RecommendAdapter() : RecyclerView.Adapter<RecommendAdapter.RecommentViewHolder>() {
+class RecommendAdapter : RecyclerView.Adapter<RecommendAdapter.RecommentViewHolder>() {
     val recomment_userList = mutableListOf<Recomment>()
 
     override fun onCreateViewHolder(
