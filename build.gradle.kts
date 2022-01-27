@@ -9,7 +9,7 @@ buildscript {
         classpath("com.google.android.gms:oss-licenses-plugin:0.10.4")
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.8.1")
         classpath("com.diffplug.spotless:spotless-plugin-gradle:6.1.2")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.4.0")
     }
 }
 
